@@ -3,18 +3,18 @@ import {dbName} from '../constant.js'
 import 'dotenv/config'
 
 function connectDB () {
-    new Promise((resolve, reject) => {
+  return  new Promise((resolve, reject) => {
         try {
             mongoose.connect(`${process.env.MONGODB_URL}/${dbName}`)
-            .then((connectionInstance) => { console.log(`Connected to ${dbName} \n ${console.log(connectionInstance.connection)}`); resolve()})
+            .then((connectionInstance) => { console.log(`Connected to DB : ${dbName}`); return resolve()})
             .catch(err => {
                 console.error("ERROR connecting to DB:", err)
-                reject(err)
+                return reject(err)
             })
         }
         catch (err) {
             console.error("ERROR:",err)
-            reject(err)
+           return reject(err)
         }
     })
 }

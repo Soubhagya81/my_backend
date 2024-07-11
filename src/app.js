@@ -1,14 +1,25 @@
-import express from 'express';
+import express from "express"
+import cookieParser from "cookie-parser"
+import cors from "cors"
 
+const app = express()
 
-const app = express();
+app.use(cors())
 
-app.get('/', (req, res) => {
-   res.send ("hello world!");
-})
+app.use(
+  express.json({
+    limit: "14kb",
+  })
+)
 
-const port = process.env.PORT || 3000;
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+)
 
-app.listen(port,()=> {
-    console.log(`Server is running on port ${port}`);
-})
+app.use(express.static("public"))
+
+app.use(cookieParser())
+
+export default app
