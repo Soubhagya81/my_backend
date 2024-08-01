@@ -24,3 +24,6 @@ const uploadFileOnCloudnary = async (file_path) => {
     return null
   }
 } 
+
+
+export {uploadFileOnCloudnary}

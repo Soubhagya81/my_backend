@@ -4,7 +4,7 @@ import 'dotenv/config'
 import  {dbName}  from "./src/constant.js"
 import express from 'express'
 import connectDB from "./src/db/dbConnect.js"
-const app = express()
+import app from "./src/app.js"
 
 
 connectDB() 

@@ -1,4 +1,5 @@
 import express from "express"
+import { Router } from "express"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 
@@ -17,6 +18,10 @@ app.use(
     extended: true,
   })
 )
+
+import userRouter from './routes/user.routes.js'
+
+app.use("/api/v1/users", userRouter)
 
 app.use(express.static("public"))
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose, { Schema } from "mongoose"
 import bcrypt from "bcrypt"
 import 'dotenv/config'
 import jwt from "jsonwebtoken"
@@ -9,14 +9,30 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  name: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true,
   },
+  watchList : [
+    {
+    type : Schema.Types.ObjectId,
+    ref : "Video"
+  } ],
+  fullName: {
+    type: String,
+    required: true,
+  },
+  refreshToken : {
+     type : String,
+     required: true
+  },
+  avatar : {
+    type : String,
+    required: true
+  },
+  coverImage : {
+    type : String,
+  }
 })
 
 userSchema.pre("save", async function (next) {
@@ -42,7 +58,7 @@ userSchema.methods.generateAccessToken = function () {
     }
   )
 }
-usetSchema.methods.generateRefressToken = function () {
+userSchema.methods.generateRefressToken = function () {
     return jwt.sign({
         _id : this.id,
         email : this.email,
